@@ -1,0 +1,11 @@
+<h1><%= params["id"] %></h1>
+<p><%= @value %></p>
+<%= form_tag(counter_path(params["id"]), method: "patch") do %>
+  <%= hidden_field_tag(:type, :incr) %>
+  <%= submit_tag("Increment") %>
+<% end %>
+<%= form_tag(counter_path(params["id"]), method: "patch") do %>
+  <%= hidden_field_tag(:type, :decr) %>
+  <%= submit_tag("Decrement") %>
+<% end %>
+
