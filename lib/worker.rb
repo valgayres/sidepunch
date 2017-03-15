@@ -9,8 +9,8 @@ class Worker
       args = queue.pop
       next unless args
 
-      klass = args.unshift.constantize
-      klass.new.perform(args)
+      klass = args.shift.constantize
+      klass.new.perform(*args)
 
     end
   end

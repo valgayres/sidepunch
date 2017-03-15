@@ -22,7 +22,7 @@ class SidepushQueue
 
   def pop
     jid       = self.class.connection.brpop("jobs:#{channel}")
-    json_args = self.class.connection.get(jid)
+    json_args = self.class.connection.get(jid[1])
     JSON.parse(json_args) if json_args
   end
 end
