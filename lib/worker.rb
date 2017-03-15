@@ -9,6 +9,7 @@ class Worker
       args = queue.pop
       next unless args
 
+      puts "got args #{args}"
       klass = args.shift.constantize
       klass.new.perform(*args)
 

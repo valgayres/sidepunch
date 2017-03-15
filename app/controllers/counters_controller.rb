@@ -6,10 +6,9 @@ class CountersController < ApplicationController
   end
 
   def update
-    Faraday.put("https://counter-as-a-service.herokuapp.com/#{params["id"]}/#{params["type"]}")
 
     # Uncomment this line to do the update asynchronously
-    # UpdateCounterWorker.perform_async(params["id"], params["type"])
+    UpdateCounterWorker.perform_async(params["id"], params["type"])
     
     redirect_to counter_path(params["id"])
   end
