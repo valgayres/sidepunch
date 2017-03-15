@@ -1,5 +1,6 @@
-class Queue
+class SidepushQueue
   cattr_accessor :connection
+  attr_accessor :channel
 
   class << self
     def get_new_jid
@@ -7,7 +8,6 @@ class Queue
     end
   end
 
-  attr_accessor :channel
 
   def initialize(channel)
     self.channel = channel

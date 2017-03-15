@@ -1,4 +1,4 @@
-require 'queue'
+require 'sidepush_queue'
 require 'worker'
 
-Queue.connection = Redis.new
+SidepushQueue.connection = Redis.new
