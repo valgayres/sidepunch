@@ -73,8 +73,12 @@ The rake task needs to have a polling mechanism to be able to check is a new job
 
 ## Communication between the main app and the rake task
 
-Since the main app and the rake task don't share memory, we need to use an external service to store saved jobs that can be access by both programs.
-
-For example, you can use either a database, a system based on files, etc.
+Since the main app and the rake task don't share memory, we need to use an external service to store saved jobs that can be access by both programs. For example, you can use either a database, a system based on files, etc.
 
 For practicality, we will propose an implementation using Redis.
+
+The proposed implementation will use the list feature of Redis. Implemented correctly, this feature can be used as a FIFO queue (First In First Out).
+
+For that, we recommand to use the following commands:
+- Push: [lpush](https://redis.io/commands/lpush)
+- Pop: [brpop](https://redis.io/commands/brpop)
