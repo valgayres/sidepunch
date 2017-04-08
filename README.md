@@ -51,4 +51,17 @@ We will only consider the functionnality of Sidekiq to use the `perform_async` m
 
 In that case, a job can be described as the class for which you want to call the method `perform`, and an array of arguments.
 
+Example:
+
+```
+class MyWorker
+  def perform(arg1, arg2)
+    #do some stuff
+  end
+end
+```
+
+In that case, if you want to perform MyWorker with the arguments `1` and `'a'`, a possible description is:
+`[MyWorker, 1, 'a']`
+
 ## Using redis to store jobs
