@@ -1,6 +1,6 @@
 namespace :sidepunch do
 
   task run: :environment do
-    Worker.new(SidepushQueue.new('default')).execute
+    Sidepunch::BackgroundWorker.new(Sidepunch::Queue.new('default')).execute
   end
 end
