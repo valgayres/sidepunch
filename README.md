@@ -27,7 +27,7 @@ class MyWorker
 
 Including the module `Sidekiq::Worker`, the class gets a static method `perform_async` that gets executed in the sidekiq process instead of the process that called the method.
 
-Sidekiq uses Redis to transmit the data from the main process to the process handling the execution of the code.
+Sidekiq uses [Redis](https://redis.io/) to transmit the data from the main process to the process handling the execution of the code.
 
 ## What you will have to do
 
@@ -64,4 +64,17 @@ end
 In that case, if you want to perform MyWorker with the arguments `1` and `'a'`, a possible description is:
 `[MyWorker, 1, 'a']`
 
-## Using redis to store jobs
+## Creation of a rake task that execute the jobs
+
+In order to execute the jobs you saved, you will have to create a program outside your main Rails application that will be able to fetch the jobs and execute them.
+The easiest way to do that is to create a rake task, for which it will already have access to all the code of your Rails app.
+
+The rake task needs to have a polling mechanism to be able to check is a new job is to be perform, and in that case, perform it. Moreover, it needs run indefinitely.
+
+## Communication between the main app and the rake task
+
+Since the main app and the rake task don't share memory, we need to use an external service to store saved jobs that can be access by both programs.
+
+For example, you can use either a database, a system based on files, etc.
+
+For practicality, we will propose an implementation using Redis.
