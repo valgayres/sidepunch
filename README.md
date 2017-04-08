@@ -1,5 +1,3 @@
-[TOC]
-
 # Sidepunch kata
 
 The goal of this kata is to build Sidepunch an alternative implementation of Sidekiq, a background jobs processor.
@@ -36,10 +34,21 @@ Sidekiq uses Redis to transmit the data from the main process to the process han
 In order to simulate how sidekiq work, you will have to handle several things:
 
 Mandatory
-: In the main process, how to save the job to be performed in redis 
-: In the background process, how to find the job to be performed
+1. In the main process, how to save the jobs to be performed
+2. Create a background process, which is capable to find the jobs to be performed
 
 Optional
-: Handle retries in the background process
-: Create a queue logic
-: Multithreading of the background process
+1. Handle retries in the background process
+2. Create a queue logic
+3. Multithreading of the background process
+
+
+# How to save the jobs to be performed
+
+## Description of one job
+
+We will only consider the functionnality of Sidekiq to use the `perform_async` method on worker (in opposition to the delay method that can be called on any object).
+
+In that case, a job can be described as the class for which you want to call the method `perform`, and an array of arguments.
+
+## Using redis to store jobs
